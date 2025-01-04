@@ -15,6 +15,8 @@ import Register from "../pages/Auth/Register";
 import Dashboard from "../pages/Admin/Dashboard";
 import FAQ from "../pages/FAQ";
 import Guide from "../pages/Guide";
+import Contact from "../pages/Contact";
+import Don from "../pages/Don";
 
 const ProgressHandler = () => {
   const location = useLocation();
@@ -43,6 +45,8 @@ function AppRoutes() {
           <Route path="community" element={<Community />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="guide" element={<Guide />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="don" element={<Don />} />
         </Route>
 
         {/* Routes Auth */}

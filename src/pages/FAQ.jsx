@@ -1,8 +1,11 @@
 import React from "react";
-import { FaAngleDown, FaInfoCircle, FaCat, FaDonate } from "react-icons/fa";
+import { FaAngleDown, FaInfoCircle, FaCat, FaDonate, FaUsers, FaVideo, FaEnvelope, FaHeart } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function FAQ() {
+  const navigate = useNavigate();
+
   const faqs = [
     {
       question: "Comment puis-je faire un don ?",
@@ -20,13 +23,31 @@ function FAQ() {
       question: "Comment puis-je rejoindre la communauté ?",
       answer:
         "Créez un compte sur KittyNest, participez aux discussions, et rejoignez nos événements pour soutenir notre cause.",
-      icon: <FaInfoCircle className="text-secondary text-xl" />,
+      icon: <FaUsers className="text-secondary text-xl" />,
     },
     {
       question: "Où vont les dons ?",
       answer:
         "Tous les dons servent à fournir des soins vétérinaires, de la nourriture et un abri aux chats sans maison.",
       icon: <FaDonate className="text-primary text-xl" />,
+    },
+    {
+      question: "Comment garantissez-vous que les dons sont utilisés pour les chats ?",
+      answer:
+        "Pour chaque don effectué, une vidéo de preuve sera envoyée sur votre WhatsApp, email et SMS, montrant l'aide apportée aux chats.",
+      icon: <FaVideo className="text-accent text-xl" />,
+    },
+    {
+      question: "Puis-je adopter un chat via KittyNest ?",
+      answer:
+        "Oui, vous pouvez. Parcourez notre section d'adoption pour trouver le compagnon parfait pour votre famille.",
+      icon: <FaHeart className="text-secondary text-xl" />,
+    },
+    {
+      question: "Comment puis-je contacter votre équipe ?",
+      answer:
+        "Vous pouvez nous contacter via notre page Contact. Cliquez sur le bouton ci-dessous pour en savoir plus.",
+      icon: <FaEnvelope className="text-primary text-xl" />,
     },
   ];
 
@@ -35,17 +56,36 @@ function FAQ() {
     visible: { height: "auto", opacity: 1, transition: { duration: 0.4 } },
   };
 
+  const handleNavigateToContact = () => {
+    navigate("/contact");
+  };
+
   return (
-    <div className="min-h-screen bg-light flex flex-col items-center py-16 px-6 mt-5">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="min-h-screen bg-light flex flex-col items-center py-16 px-6 mt-5"
+    >
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-accent mb-4">
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl font-bold text-accent mb-4"
+        >
           Foire aux Questions
-        </h1>
-        <p className="text-gray-600 max-w-3xl mx-auto">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-gray-600 max-w-3xl mx-auto"
+        >
           Obtenez des réponses aux questions fréquemment posées sur KittyNest.
-          Si vous avez besoin d'aide supplémentaire, contactez-nous.
-        </p>
+          Si vous avez d'autres questions, notre équipe est là pour vous aider.
+        </motion.p>
       </div>
 
       {/* FAQ Section */}
@@ -54,7 +94,8 @@ function FAQ() {
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.3, delay: index * 0.2 }}
             className="bg-neutral p-6 rounded-lg shadow-lg"
           >
@@ -81,6 +122,14 @@ function FAQ() {
                   className="mt-4 text-gray-600 overflow-hidden"
                 >
                   <p>{faq.answer}</p>
+                  {faq.question.includes("contacter votre équipe") && (
+                    <button
+                      onClick={handleNavigateToContact}
+                      className="mt-3 px-4 py-2 bg-secondary text-light rounded-md shadow hover:bg-accent transition"
+                    >
+                      Aller à Contact
+                    </button>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </details>
@@ -107,16 +156,19 @@ function FAQ() {
               Toujours des questions ?
             </h2>
             <p className="text-gray-600 mb-6">
-              Contactez notre équipe pour plus d'informations. Nous sommes là
-              pour vous aider à faire une différence dans la vie des chats.
+              Contactez notre équipe pour plus d'informations ou visitez notre section d'assistance. Nous sommes là
+              pour vous guider.
             </p>
-            <button className="px-6 py-3 bg-primary text-light rounded-full shadow-md hover:bg-secondary transition duration-300">
+            <button
+              onClick={handleNavigateToContact}
+              className="px-6 py-3 bg-primary text-light rounded-full shadow-md hover:bg-secondary transition duration-300"
+            >
               Contactez-nous
             </button>
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

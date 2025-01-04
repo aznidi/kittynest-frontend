@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Slider from "../components/Slider";
 import Features from "../components/Features";
+import ContactSection from "../components/ContactSection";
 
 function Home() {
   return (
@@ -18,6 +19,9 @@ function Home() {
 
       {/* Features Section */}
       <Features />
+
+      {/* Contact Section */}
+      <ContactSection />
     </>
   );
 }
