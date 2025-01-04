@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
 import "swiper/css";
 import heroImage from "../assets/hero.jpg";
 // Importation des icônes depuis React Icons
@@ -41,13 +42,33 @@ const cats = [
   },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 function Slider() {
   return (
-    <div className="min-h-screen bg-neutral py-16">
+    <motion.div
+      className="min-h-screen bg-neutral py-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+    >
       <div className="container mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-accent text-center mb-12">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-accent text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
+        >
           Chats en Besoin d'Aide Urgente
-        </h2>
+        </motion.h2>
         <Swiper
           modules={[Autoplay]}
           spaceBetween={30}
@@ -62,7 +83,10 @@ function Slider() {
         >
           {cats.map((cat) => (
             <SwiperSlide key={cat.id}>
-              <div className="bg-light rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between h-[450px] relative">
+              <motion.div
+                className="bg-light rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between h-[450px] relative"
+                variants={cardVariants}
+              >
                 {/* Icon */}
                 <div className="absolute top-4 left-4">{cat.icon}</div>
                 {/* Image */}
@@ -95,12 +119,12 @@ function Slider() {
                     Voir Détails
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

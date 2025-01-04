@@ -1,5 +1,6 @@
 import React from "react";
-import { FaCat, FaHandHoldingHeart, FaSearch, FaUsers, FaDonate, FaMapMarkerAlt, FaClipboardList } from "react-icons/fa";
+import { FaCat, FaHandHoldingHeart, FaSearch } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 function Features() {
   const features = [
@@ -23,47 +24,48 @@ function Features() {
       description: "Parcourez notre liste de chats prêts à trouver un foyer aimant.",
       action: "Explorer",
     },
-    {
-      id: 4,
-      icon: <FaUsers className="text-primary text-4xl" />,
-      title: "Rejoindre la Communauté",
-      description: "Devenez membre et participez activement à notre mission.",
-      action: "S'inscrire",
-    },
-    {
-      id: 5,
-      icon: <FaDonate className="text-accent text-4xl" />,
-      title: "Campagnes de Dons",
-      description: "Contribuez à nos campagnes pour aider les chats les plus vulnérables.",
-      action: "Participer",
-    },
-    {
-      id: 6,
-      icon: <FaMapMarkerAlt className="text-primary text-4xl" />,
-      title: "Trouver un Refuge",
-      description: "Trouvez des refuges et des centres d'adoption près de chez vous.",
-      action: "Découvrir",
-    }
   ];
 
+  // Animation pour la section
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  // Animation pour les cartes
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
   return (
-    <div className="min-h-screen bg-light py-16">
+    <motion.div
+      className="py-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+    >
       <div className="container mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-accent text-center mb-12">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-accent text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
+        >
           Fonctionnalités de KittyNest
-        </h2>
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature) => (
-            <div
+          {features.map((feature, index) => (
+            <motion.div
               key={feature.id}
               className="bg-neutral rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col items-center text-center"
+              variants={cardVariants}
+              custom={index}
             >
               {/* Icon */}
               <div className="mb-4">{feature.icon}</div>
               {/* Title */}
-              <h3 className="text-xl font-bold text-primary mb-2">
-                {feature.title}
-              </h3>
+              <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
               {/* Description */}
               <p className="text-gray-600 text-sm mb-4">{feature.description}</p>
               {/* Action Button */}
@@ -78,11 +80,11 @@ function Features() {
                   </span>
                 </button>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

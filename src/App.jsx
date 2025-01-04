@@ -1,20 +1,8 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Slider from './components/Slider';
-import Features from './components/Features';
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Hero />
-      <About />
-      <Slider />
-      <Features />
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
