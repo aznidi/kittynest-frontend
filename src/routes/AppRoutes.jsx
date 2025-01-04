@@ -17,6 +17,8 @@ import FAQ from "../pages/FAQ";
 import Guide from "../pages/Guide";
 import Contact from "../pages/Contact";
 import Don from "../pages/Don";
+import SuccessPayment from "../pages/SuccessPayment";
+import CancelPayment from "../pages/CancelPayment";
 
 const ProgressHandler = () => {
   const location = useLocation();
@@ -47,6 +49,8 @@ function AppRoutes() {
           <Route path="guide" element={<Guide />} />
           <Route path="contact" element={<Contact />} />
           <Route path="don" element={<Don />} />
+          <Route path="success" element={<SuccessPayment />} />
+          <Route path="cancel" element={<CancelPayment />} />
         </Route>
 
         {/* Routes Auth */}
