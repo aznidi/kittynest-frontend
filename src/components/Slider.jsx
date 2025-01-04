@@ -67,7 +67,7 @@ function Slider() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 0.8 } }}
         >
-          Chats en Besoin d'Aide Urgente
+          Chats en Besoin d'Aide <span className="text-red-500">Urgente</span>
         </motion.h2>
         <Swiper
           modules={[Autoplay]}
